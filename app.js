@@ -1,42 +1,112 @@
-const verificar = function () {
-    const operando1 = (document.getElementById("operando1").value);
-  
-
-// let resultado = 0;
-// let n1=0;
-// let n2=0;
-// n1=operando1.length;
-// n2=operando2.length;
-// document.getElementById("resultado").innerHTML = "la palabra mas larga es: "+ n1;
-
-
-let invertida="";
-let multiplicar=0;
-invertida=parseFloat(invertirCadena(operando1));
-
-
-document.getElementById("resultado").innerHTML = invertida;
+const iniciar = function () {
+    let lista = ["201012341-3"]
+    localStorage.setItem("data", JSON.stringify(lista));
 
 }
+
+const listados = function () {
+    var data = JSON.parse(localStorage.getItem("data"));
+
+    let boton = document.getElementById("bot3").textContent
+
+    if (boton == "mostrar") {
+        document.getElementById("listado").innerHTML = data;
+
+        document.getElementById("bot3").innerHTML = "ocultar";
+    }
+    else {
+        document.getElementById("bot3").innerHTML = "mostrar";
+        document.getElementById("listado").innerHTML = "click en mostrar";
+    }
+
+
+}
+
+const repetido = function () {
+    let operando1 = (document.getElementById("operando1").value);
+    var data = JSON.parse(localStorage.getItem("data"));
+
+    let td = data.length;
+    let invertida = "";
+    let multi = "";
+    let modulo = 0;
+    let lista = []
+    lista = data;
+
+
+    invertida = (invertirCadena(operando1));
+
+    multi = (multiplicar(invertida));
+    modulo = multi % 11;
+    resultado = 11 - modulo;
+    console.log(resultado);
+    let pos = lista.includes(operando1 + "-" + resultado)
+    console.log(pos)
+    if (pos == true) {
+        console.log("repetido");
+        alert("el numero esta repetido")
+    }
+    else {
+        console.log("repetido");
+        alert("el numero no esta repetido")
+    }
+
+}
+const verificar = function () {
+    let operando1 = (document.getElementById("operando1").value);
+    var data = JSON.parse(localStorage.getItem("data"));
+
+    let td = data.length;
+    let invertida = "";
+    let multi = "";
+    let modulo = 0;
+    let lista = []
+    lista = data;
+
+
+    invertida = (invertirCadena(operando1));
+
+    multi = (multiplicar(invertida));
+    modulo = multi % 11;
+    resultado = 11 - modulo;
+    console.log(resultado);
+    let pos = lista.includes(operando1 + "-" + resultado)
+    console.log(pos)
+    if (pos == true) {
+        console.log("repetido");
+        alert("el numero esta repetido")
+    }
+    else {
+        document.getElementById("resultado").innerHTML = operando1 + "-" + resultado;
+        lista[td] = operando1 + "-" + resultado;
+        console.log(data);
+
+    }
+    localStorage.setItem("data", JSON.stringify(lista));
+
+}
+
 function invertirCadena(cad) {
-    // Paso 1. Usa el método split() para devolver un nuevo arreglo
-    var separarCadena = cad.split(""); // var separarCadena = "hola".split("");
-    // ["h", "o", "l", "a"]
- 
-    // Paso 2. Usa el método reverse() para invertir el nuevo arreglo creado
-    var invertirArreglo = separarCadena.reverse(); // var invertirArreglo = ["h", "o", "l", "a"].reverse();
-    // ["a", "l", "o", "h"]
- 
-    // Paso 3. Usa el método join() para unir todos los elementos del arreglo en una cadena
-    var unirArreglo = invertirArreglo.join(""); // var unirArreglo = ["a", "l", "o", "h"].join("");
-    // "aloh"
-    
-    //Paso 4. Devolver la cadena invertida
-    return unirArreglo; // "aloh"
+    var separarCadena = cad.split("");
+    var invertirArreglo = separarCadena.reverse();
+    var unirArreglo = invertirArreglo.join("");
+    return unirArreglo;
 }
 function multiplicar(cad) {
-    let suma=0;
-    let x=0;
- 
-    return unirArreglo;
+    let n = 0;
+    let j = 1;
+    let suma = 0;
+    var separarCadena = cad.split("");
+    n = separarCadena.length
+    for (let i = 0; i <= n - 1; i++) {
+        j = j + 1;
+        if (j > 7) {
+            j = j - 6;
+        }
+        suma = parseFloat(cad[i]) * j + suma;
+
+    }
+
+
+    return suma;
 }
